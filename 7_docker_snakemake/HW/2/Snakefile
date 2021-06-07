@@ -1,0 +1,20 @@
+IDS, = glob_wildcards("input/{id}")
+
+rule all:
+    input:
+        expand("output/{id}", id=IDS)
+
+rule cnt:
+    input:
+        "input/{id}"
+    output:
+        "output/{id}"
+    run:
+        from collections import Counter
+
+        for inp, outp in zip(input,output):
+            input_file = open(inp).read().lower().replace(' ','').replace('.','').replace('\n','')
+            tuples = sorted(Counter(input_file).most_common())
+            with open(outp,'w') as out:
+                for t in tuples:
+                    out.write(f"{t[0]}: {t[1]}\n")
