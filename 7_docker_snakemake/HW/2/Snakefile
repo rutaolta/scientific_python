@@ -1,4 +1,5 @@
 IDS, = glob_wildcards("input/{id}")
+IDS = [ id for id in IDS if id[0] != "." ]
 
 rule all:
     input:
