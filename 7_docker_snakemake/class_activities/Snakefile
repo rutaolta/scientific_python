@@ -1,0 +1,4 @@
+rule test:
+    shell:
+        "touch test.txt; "
+        "echo 123 > test.txt"
